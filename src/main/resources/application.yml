@@ -1,0 +1,38 @@
+spring:
+  application:
+    name: faceburger
+
+  # Thymeleaf configuration
+  thymeleaf:
+    cache: false
+
+  # DB Configuration
+  datasource:
+    url: jdbc:h2:file:~\faceburger-db
+    driver-class-name: org.h2.Driver
+    username: admin
+    password: admin
+
+  # JPA Configuration
+  jpa:
+    hibernate:
+      ddl-auto: update # Change to 'update' for production ;) or not :(
+    show-sql: true
+
+  # H2 Configuration
+  h2:
+    console:
+      enabled: true
+
+  data:
+    web:
+      pageable:
+        default-page-size: 5
+        max-page-size: 50
+  web:
+    resources:
+      static-locations: classpath:/static/, file:${faceburger.root-image-path}
+
+# Application extra configuration stuff
+faceburger:
+  root-image-path: "/faceburger-images"

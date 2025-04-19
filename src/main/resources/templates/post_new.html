@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layout.html}">
+<head>
+    <title>Home Page</title>
+</head>
+<body>
+<div layout:fragment="content">
+    <h1>Create a new post</h1>
+    <hr>
+    <form class="mb-3" th:action="@{/post/new}" th:object="${postForm}" method="post" enctype="multipart/form-data">
+        <div class="mb-3">
+            <label for="author" class="form-label">Author</label>
+            <input id="author" type="text" class="form-control" th:errorclass="is-invalid" th:field="*{author}"/>
+            <div class="invalid-feedback" th:if="${#fields.hasErrors('author')}" th:errors="*{author}"></div>
+        </div>
+        <div class="mb-3">
+            <label for="title" class="form-label">Title</label>
+            <input id="title" type="text" class="form-control" th:errorclass="is-invalid" th:field="*{title}"/>
+            <div class="invalid-feedback" th:if="${#fields.hasErrors('title')}" th:errors="*{title}"></div>
+        </div>
+        <div class="mb-3">
+            <label for="text" class="form-label">Text</label>
+            <textarea id="text" class="form-control" th:errorclass="is-invalid" th:field="*{text}"
+                      rows="5"></textarea>
+            <div class="invalid-feedback" th:if="${#fields.hasErrors('text')}" th:errors="*{text}"></div>
+        </div>
+        <div class="mb-3">
+            <label for="formFile" class="form-label">Default file input example</label>
+            <input id="formFile" class="form-control" type="file" th:errorclass="is-invalid" th:field="*{images}"
+                   multiple/>
+            <div class="invalid-feedback" th:if="${#fields.hasErrors('images')}" th:errors="*{images}"></div>
+        </div>
+        <button type="submit" class="btn btn-primary">Post</button>
+    </form>
+    <div th:if="${errorMessage}" class="alert alert-danger alert-dismissible fade show" role="alert">
+        <span th:text="${errorMessage}"></span>
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
+</div>
+</body>
+</html>

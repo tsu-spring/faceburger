@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layout.html}">
+<head>
+    <title>Home Page</title>
+</head>
+<body>
+<div layout:fragment="content">
+    <div class="card">
+        <div class="card-body pb-0">
+            <h5 class="card-title" th:text="${post.title}">Post Title</h5>
+            <h6 class="card-subtitle mb-2 text-body-secondary">
+                <span>By</span>
+                <b th:text="${post.author}">Bob Smith</b>
+                <span th:text="${post.prettyCreateTime}">1 minute ago</span>
+            </h6>
+        </div>
+        <div class="card-body py-2">
+            <p class="card-text mb-0">
+                <img th:each="image : ${post.images}" th:if="${post.images != null && !post.images.isEmpty()}"
+                     th:src="@{${image.path}}"
+                     class="img-fluid img-thumbnail" alt="Post image"/>
+            </p>
+        </div>
+        <div class="card-body py-2">
+            <p class="card-text mb-1" th:text="${post.text}">Post Text</p>
+        </div>
+        <div class="card-body py-0">
+            <h5 class="card-title">Comments</h5>
+        </div>
+        <div class="card-body py-2" th:each="c : ${post.comments}">
+            <h6 class="card-subtitle mb-2 text-body-secondary">
+                <span>By</span>
+                <b th:text="${c.author}">Bob Smith</b>
+                <span th:text="${c.prettyCreateTime}">1 minute ago</span>
+            </h6>
+            <p class="card-text mb-1" th:text="${c.text}">Comment Text</p>
+        </div>
+    </div>
+</div>
+</body>
+</html>
